@@ -1,47 +1,34 @@
 <?php
 /**
- * Created by 七月
- * User: 七月
- * Date: 2017/2/15
- * Time: 13:40
+ * Created by PhpStorm.
+ * User: fixright
+ * Date: 2017/8/27
+ * Time: 15:00
+ * E-mail: 1397153057@qq.com
  */
 
 namespace app\api\controller\v1;
-
-
-use app\api\controller\BaseController;
-use app\api\validate\IDMustBePositiveInt;
+use app\api\validate\IDMustBePostiveInt;
 use app\api\model\Banner as BannerModel;
-use app\lib\exception\MissException;
+use app\lib\exception\BannerMissException;
+use think\Exception;
 
-/**
- * Banner资源
- */ 
-class Banner extends BaseController
+class Banner
 {
-//    protected $beforeActionList = [
-//        'checkPrimaryScope' => ['only' => 'getBanner']
-//    ];
+  /*
+   * 获取指定id的banner信息
+   * @url /banner/:id
+   * @http GET
+   * @id banner的id号
+   * */
+    public function getBanner($id){
+        (new IDMustBePostiveInt())->goCheck();
 
-    /**
-     * 获取Banner信息
-     * @url     /banner/:id
-     * @http    get
-     * @param   int $id banner id
-     * @return  array of banner item , code 200
-     * @throws  MissException
-     */
-    public function getBanner($id)
-    {
-        $validate = new IDMustBePositiveInt();
-        $validate->goCheck();
-        $banner = BannerModel::getBannerById($id);
-        if (!$banner ) {
-            throw new MissException([
-                'msg' => '请求banner不存在',
-                'errorCode' => 40000
-            ]);
+            $banner = BannerModel::getBannerByID($id);
+        if(!$banner){
+            throw new Exception('内部错误');
         }
         return $banner;
     }
+
 }

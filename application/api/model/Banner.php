@@ -1,28 +1,25 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: fixright
+ * Date: 2017/8/27
+ * Time: 18:49
+ * E-mail: 1397153057@qq.com
+ */
 
 namespace app\api\model;
 
-use think\Model;
 
-class Banner extends BaseModel
+use think\Exception;
+
+class Banner
 {
-    public function items()
-    {
-        return $this->hasMany('BannerItem', 'banner_id', 'id');
-    }
-    //
-
-    /**
-     * @param $id int banner所在位置
-     * @return Banner
-     */
-    public static function getBannerById($id)
-    {
-        $banner = self::with(['items','items.img'])
-            ->find($id);
-
-//         $banner = BannerModel::relation('items,items.img')
-//             ->find($id);
-        return $banner;
+    public static function getBannerByID($id){
+        /*try{
+            1/0;
+        }catch (Exception $ex){
+            throw  $ex;
+        }*/
+        return null;
     }
 }

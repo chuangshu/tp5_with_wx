@@ -1,20 +1,35 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: 七月
- * Date: 2017/2/12
- * Time: 18:29
+ * User: fixright
+ * Date: 2017/8/27
+ * Time: 21:23
+ * E-mail: 1397153057@qq.com
  */
 
 namespace app\lib\exception;
 
-/**
- * Class ParameterException
- * 通用参数类异常错误
- */
+
+use Throwable;
+
 class ParameterException extends BaseException
 {
     public $code = 400;
+    public $msg = '参数错误';
     public $errorCode = 10000;
-    public $msg = "invalid parameters";
+    public function __construct($params=[])
+    {
+        if(!is_array($params)){
+            return ;
+        }
+        if(array_key_exists('code',$params)){
+            $this->code = $params['code'];
+        }
+        if(array_key_exists('msg',$params)){
+            $this->msg = $params['msg'];
+        }
+        if(array_key_exists('errorCode',$params)){
+            $this->errorCode = $params['errorCode'];
+        }
+    }
 }
