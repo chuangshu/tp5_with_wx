@@ -10,16 +10,14 @@
 namespace app\api\model;
 
 
-use think\Exception;
+use think\Db;
+use think\Model;
 
-class Banner
+class Banner extends Model
 {
     public static function getBannerByID($id){
-        /*try{
-            1/0;
-        }catch (Exception $ex){
-            throw  $ex;
-        }*/
-        return null;
+//       $result = Db::query('select * from banner_item where banner_id = ?',[$id]);
+        $result = Db::table('banner_item')->where('banner_id','=',$id)->select();
+       return $result;
     }
 }

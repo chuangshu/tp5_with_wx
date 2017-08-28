@@ -10,7 +10,6 @@
 namespace app\lib\exception;
 
 
-use think\Exception;
 use think\exception\Handle;
 use think\Log;
 use think\Request;
@@ -22,7 +21,7 @@ class ExceptionHandler extends Handle
     private $erroCode;
 
 //    需要返回客户端当前请求的URL
-    public function render(Exception $e)
+    public function render(\Exception $e)
     {
 
         if ($e instanceof BaseException) {
@@ -50,7 +49,7 @@ class ExceptionHandler extends Handle
         return json($result,$this->code);
     }
 
-    private function recordErrorLog(Exception $e){
+    private function recordErrorLog(\Exception $e){
         Log::init([
             'type'  => 'File',
             // 日志保存目录
